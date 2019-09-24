@@ -11,27 +11,43 @@
             android:text="@string/textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView4"
+            android:id="@+id/connAlert"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-    />
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
     <ListView
             android:id="@+id/dirList"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"
-            android:layout_width="match_parent" app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar2"/>
-    <android.support.v7.widget.Toolbar
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="24dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:theme="?attr/actionBarTheme"
-            android:minHeight="?attr/actionBarSize"
-            android:id="@+id/toolbar2" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+
+    <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true" app:srcCompat="@android:drawable/ic_menu_revert"
+            android:id="@+id/floatingMenuButton" app:backgroundTint="@android:color/holo_orange_dark"
+            android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:clickable="true" app:srcCompat="@android:drawable/ic_delete"
+            android:id="@+id/floatingCloseButton"
+            app:layout_constraintBottom_toBottomOf="@+id/floatingMenuButton"
+            app:layout_constraintEnd_toEndOf="@+id/floatingMenuButton" />
+    <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:clickable="true" app:srcCompat="@android:drawable/ic_menu_send"
+            tools:layout_editor_absoluteY="520dp" tools:layout_editor_absoluteX="283dp"
+            android:id="@+id/flostingOpenStream"
+            app:layout_constraintBottom_toBottomOf="@+id/floatingMenuButton"
+            app:layout_constraintEnd_toEndOf="@+id/floatingMenuButton"/>
 
 </android.support.constraint.ConstraintLayout>

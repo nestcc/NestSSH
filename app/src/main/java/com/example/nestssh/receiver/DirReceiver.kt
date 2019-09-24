@@ -8,6 +8,7 @@ class DirReceiver {
 
     val jsch = jschConn()
 
+
     fun init(method: String){
         if (method == "EXEC"){
             jsch.initExec()
@@ -16,10 +17,12 @@ class DirReceiver {
         }
     }
 
+
     fun refreshDirRoot(): String{
         this.dirRoot = this.jsch.exec("pwd")
         return this.dirRoot
     }
+
 
     fun getDirList(dir: String): List<String> {
         return jsch.exec("cd $dir&&ls").split(' ')

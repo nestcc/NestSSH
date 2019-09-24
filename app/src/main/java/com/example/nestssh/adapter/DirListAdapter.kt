@@ -14,30 +14,28 @@ class DirListAdapter(private val context: Context, private val list: List<Any?>)
     @SuppressLint("SetTextI18n")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View
-
-        if (convertView == null){
-            if (list.equals(listOf(""))){
-                view = LayoutInflater.from(context).inflate(R.layout.dir_list_unexpected, null)
-            } else if (list.equals(listOf("ERROR_WHILE_GETTING_SESSION"))){
-                view = LayoutInflater.from(context).inflate(R.layout.dir_list_unexpected, null)
-                view.unexpection_info.text = "Wrong log in information"
-            } else {
-                view = LayoutInflater.from(context).inflate(R.layout.dir_list,null)
-                view.item_name.text = this.list[position].toString().dropWhile { it == ' ' }
-            }
+        if (list == listOf("")){
+            view = LayoutInflater.from(context).inflate(R.layout.dir_list_unexpected, null)
+        } else if (list == listOf("ERROR_WHILE_GETTING_SESSION")){
+            view = LayoutInflater.from(context).inflate(R.layout.dir_list_unexpected, null)
+            view.unexpection_info.text = "Wrong log in information"
         } else {
-            view = convertView
+            view = LayoutInflater.from(context).inflate(R.layout.dir_list,null)
+            view.item_name.text = this.list[position].toString().dropWhile { it == ' ' }
         }
         return view
     }
+
 
     override fun getCount(): Int {
         return this.list.size
     }
 
+
     override fun getItem(position: Int): Any {
-        return this.list[position].toString()
+        return this.list[position].toString() + " "
     }
+
 
     override fun getItemId(position: Int): Long {
         return position.toLong()

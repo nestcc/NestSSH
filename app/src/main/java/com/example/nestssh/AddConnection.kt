@@ -1,5 +1,7 @@
 package com.example.nestssh
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -10,9 +12,10 @@ import android.os.Message
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import android.view.animation.OvershootInterpolator
 import kotlinx.android.synthetic.main.activity_add_connection.*
+import kotlinx.android.synthetic.main.activity_conn_dir.*
 import java.net.InetAddress
-import kotlin.concurrent.thread
 
 /*
 * connsName 保存所有connectiond的saveName,以及计数总connection个数的totalNum
@@ -31,6 +34,7 @@ class AddConnection : AppCompatActivity() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     public fun saveConn(view: View){
         val spName: SharedPreferences = getSharedPreferences("connsName", Context.MODE_PRIVATE)
         if (spName.contains(saveName.text.toString())){
@@ -65,6 +69,7 @@ class AddConnection : AppCompatActivity() {
     /*
     * 通过ping操作测试连接是否成功
     */
+    @SuppressLint("SetTextI18n")
     public fun testConn(view: View){
         var status = false
         connStatus.text = "testing"

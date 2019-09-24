@@ -46,6 +46,7 @@ class jschConn {
         this.port = port
     }
 
+
     fun initExec(){
         this.sess = jsch.getSession(this.userName, this.host, this.port)
         this.sess!!.setPassword(this.pwd)
@@ -65,6 +66,7 @@ class jschConn {
             Log.i("JSchException", jschExc.toString())
         }
     }
+
 
     fun exec(cmd: String): String{
         try{
