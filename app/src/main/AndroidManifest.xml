@@ -4,6 +4,9 @@
           package="com.example.nestssh">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE "/>
 
     <application
             android:allowBackup="true"
@@ -13,6 +16,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".CommandLine">
+        </activity>
         <activity android:name=".ConnDir">
         </activity>
         <activity android:name=".ManageConnection">

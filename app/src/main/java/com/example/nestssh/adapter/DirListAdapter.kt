@@ -18,7 +18,7 @@ class DirListAdapter(private val context: Context, private val list: List<Any?>)
             view = LayoutInflater.from(context).inflate(R.layout.dir_list_unexpected, null)
         } else if (list == listOf("ERROR_WHILE_GETTING_SESSION")){
             view = LayoutInflater.from(context).inflate(R.layout.dir_list_unexpected, null)
-            view.unexpection_info.text = "Wrong log in information"
+            view.unexpection_info.text = "Wrong login information"
         } else {
             view = LayoutInflater.from(context).inflate(R.layout.dir_list,null)
             view.item_name.text = this.list[position].toString().dropWhile { it == ' ' }

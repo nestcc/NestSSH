@@ -11,7 +11,7 @@ class DirReceiver {
 
     fun init(method: String){
         if (method == "EXEC"){
-            jsch.initExec()
+            jsch.initSession()
         } else {
             Log.i("initalize error", "$method not exist")
         }

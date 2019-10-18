@@ -1,9 +1,9 @@
 package com.example.nestssh
 
-import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.nestssh.receiver.DirReceiver
@@ -86,13 +86,28 @@ class ConnDir : AppCompatActivity() {
 
         floatingMenuButton.setOnLongClickListener {
             if (flBtnUp){
-                this.finish()
+                hideMenu()
+                flBtnUp = false
             } else {
                 showMenu()
-                Log.i("long click", "in false")
                 flBtnUp = true
             }
             true
+        }
+
+        floatingCloseButton.setOnClickListener {
+            this.finish()
+        }
+
+        flostingOpenStream.setOnClickListener {
+            val commandStream = Intent(this, CommandLine::class.java)
+                .putExtra("host", this.host_conn)
+                .putExtra("port", this.port)
+                .putExtra("pwd", this.pwd_conn)
+                .putExtra("user_name", this.user_name)
+                .putExtra("timeout", this.timeout)
+
+            startActivity(commandStream)
         }
     }
 
@@ -130,23 +145,26 @@ class ConnDir : AppCompatActivity() {
 
 
     fun showMenu() {
-        val showClose = ObjectAnimator.ofInt(this.floatingCloseButton, "translationY", 0, -64)
-        val showClient = ObjectAnimator.ofInt(this.flostingOpenStream, "translationY", 0, -128)
+        val showClose = ObjectAnimator.ofFloat(this.floatingCloseButton, "translationY", 0f, -440f)
+        val showClient = ObjectAnimator.ofFloat(this.flostingOpenStream, "translationY", 0f, -220f)
 
-//        val animatorSet = AnimatorSet()
-//        animatorSet.setDuration(500)
-//        animatorSet.setInterpolator(OvershootInterpolator())
-//        animatorSet.playTogether(showClose, showClient)
-//
-//        animatorSet.start()
+        val animatorSet = AnimatorSet()
+        animatorSet.setDuration(500)
+        animatorSet.setInterpolator(OvershootInterpolator())
+        animatorSet.playTogether(showClose, showClient)
 
-        showClose.duration = 500
-        showClient.duration = 500
-        showClose.start()
-        showClient.start()
+        animatorSet.start()
+    }
 
-        val moveText = ObjectAnimator.ofInt(this.connAlert, "translationY", 0, -100)
-        moveText.duration = 3000
-        moveText.start()
+
+    fun hideMenu(){
+        val showClose = ObjectAnimator.ofFloat(this.floatingCloseButton, "translationY", -440f, 0f)
+        val showClient = ObjectAnimator.ofFloat(this.flostingOpenStream, "translationY", -220f, 0f)
+
+        val animatorSet = AnimatorSet()
+        animatorSet.setDuration(300)
+        animatorSet.playTogether(showClose, showClient)
+
+        animatorSet.start()
     }
 }

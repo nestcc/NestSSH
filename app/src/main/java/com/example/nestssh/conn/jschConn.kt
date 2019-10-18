@@ -1,13 +1,9 @@
 package com.example.nestssh.conn
 
+import android.os.Environment
 import android.util.Log
-import com.jcraft.jsch.ChannelExec
-import com.jcraft.jsch.JSch
-import com.jcraft.jsch.JSchException
-import com.jcraft.jsch.Session
-import java.io.BufferedReader
-import java.io.InputStream
-import java.io.InputStreamReader
+import com.jcraft.jsch.*
+import java.io.*
 import java.net.ConnectException
 import java.util.*
 
@@ -47,7 +43,7 @@ class jschConn {
     }
 
 
-    fun initExec(){
+    fun initSession(){
         this.sess = jsch.getSession(this.userName, this.host, this.port)
         this.sess!!.setPassword(this.pwd)
 
@@ -98,6 +94,25 @@ class jschConn {
 
     fun closeExec(){
         this.sess!!.disconnect()
+    }
+
+    fun downloadFile(downPath: String, saveName: String){
+        val sftpChannel = this.sess!!.openChannel("sftp") as ChannelSftp
+        val file = File(Environment.getExternalStorageDirectory().path + "/",saveName)
+        if (file.exists()) {
+            Log.i("File status", "exist")
+        } else {
+            Log.i("File status", "not exist")
+        }
+        try {
+            val fOutStream = FileOutputStream(file)
+            sftpChannel.get(downPath, fOutStream)
+        } catch (e: FileNotFoundException) {
+            Log.i("Operating file fail", e.toString())
+        }
+
+
+        sftpChannel.disconnect()
     }
 
 }
